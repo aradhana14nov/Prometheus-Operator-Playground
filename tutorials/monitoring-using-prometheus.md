@@ -1,12 +1,12 @@
 ---
 title: Prometheus Monitoring
-description: This tutorial explains how Prometheus monitors targets
+description: This tutorial explains how Prometheus monitors targets/endpoints
 ---
 
 ### Prometheus Monitoring
 
 
-Prometheus is designed to monitor targets. Servers, databases, standalone virtual machines and many mores can be monitored with Prometheus.
+Prometheus is designed to monitor targets. Servers, databases, standalone virtual machines etc can be monitored with Prometheus.
 
 Prometheus monitoring feature :
 
@@ -21,11 +21,9 @@ Prometheus monitoring feature :
 
 Lets take the example of MariaDB Server. Here, we will explain the monitoring of MariaDB Sever using Prometheus. 
 
+### How to monitor MariaDB server using Prometheus 
 
-### Prometheus monitoring steps to MariaDB Server
-
-
-step1:  Install the MariaDB operator by running the following command:
+Step 1:  Install the MariaDB operator by running the following command:
 
 
 ```execute
@@ -47,7 +45,7 @@ kubectl get pods -n my-mariadb-operator-app
 ```
 
 
-step2: Create below CR which will create a MariaDB database called test-db, along with user credentials.
+Step 2: To create MariaDB database called test-db along with user credentials , create the below yaml definition of the Custom Resource.
 
 ```execute
 cat <<'EOF' > MariaDBserver.yaml
@@ -82,30 +80,30 @@ spec:
 EOF
 ```
 
-- Execute below command to create MariaDBserver instance :
+- Execute below command to create an instance of MariaDBserver using the above yaml definition:
 
 ```execute
 kubectl create -f MariaDBserver.yaml -n my-mariadb-operator-app 
 ```
 
-- Check pods :
+- Check pods status :
 
 ```execute
 kubectl get pods -n my-mariadb-operator-app
 ```
 
-Steps3 : Check how we can access MariaDB Database. 
+Step 3 : Access MariaDB Database. 
+
+- Connect to MariaDB Server pod.
+
+  - Copy below command to the terminal,add the podname of MariaDB Server Instance.
+    
+    ```copycommand
+    kubectl exec -it <podname> bash -n my-mariadb-operator-app
+    ```
 
 
-- Copy below command and execute by adding MariaDB Server Instance podname.
-
-
-```copycommand
-kubectl exec -it <podname> bash -n my-mariadb-operator-app
-```
-
-
-- login through db-user 
+- Connect to the database using username **db-user** and password **db-user**
 
 
 ```execute
@@ -113,14 +111,14 @@ mysql -h ##DNS.ip## -P 30685 -u db-user -pdb-user
 ```
 
 
-- check the the created database 
+- list database
 
 ```execute
 show databases;
 ```
 
 
-- exit in order to login through root user, if you want to create some DB Tables.
+- exit the database.
 
 
 ```execute
@@ -128,54 +126,34 @@ exit
 ```
 
 
-- Login through root user
+- To login through root user use below command
 
 
-```execute
+```
 mysql -h ##DNS.ip## -P 30685 -u root -ppassword
 ```
 
 
-- Create database
 
-```execute
-create database testdb;
+
+
+Step 4: Enable monitoring service for MariaDB Server.
+
+
+- Execute below command to get services of MariadB:
+     ```execute
+     kubectl get svc -n my-mariadb-operator-app
+     ```
+Output:
 ```
-
-
-- Use already created database in above steps 
-
-
-```execute
-use testdb;
+      NAME                       TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)             AGE
+mariadb-operator-metrics   ClusterIP   10.111.158.91    <none>        8383/TCP,8686/TCP   3d4h
+mariadb-service            NodePort    10.106.178.202   <none>        80:30685/TCP        3d4h
 ```
+ 
+- Check the port of mariadb-service :
+  From above mariadb-service port is 30685 
 
-
-- create table 
-
-```execute
-create table names (name VARCHAR(100));
-```
-
-- Insert data 
-
-```execute
-insert into names values('Abhijit');
-```
-
-- Retrieve data from table
-
-```execute
-select * from names;
-```
-
-```execute
-exit
-```
-
-
-
-Step4: Create below CR for MariaDB Monitoring services.
 
 
 ```execute
@@ -206,9 +184,11 @@ Note: The database host and port should be correct for metrics to work.
 kubectl create -f MariaDBmonitoring.yaml -n my-mariadb-operator-app
 ```
 
-This CR will start Prometheus exporter pod and service. 
+This will start Prometheus exporter pod and service. 
 
-- Check pods :
+
+
+- Check pods status :
 
 ```execute
 kubectl get pods -n my-mariadb-operator-app
@@ -216,7 +196,7 @@ kubectl get pods -n my-mariadb-operator-app
 
 
 
-Step 5: Create below CR which will create Instance of ServiceMonitor to monitor MariaDB Services:
+Step 5: Create Instance of ServiceMonitor to monitor MariaDB Services:
 
 
 ```execute
@@ -248,14 +228,14 @@ EOF
 kubectl create -f ServiceMonitor.yaml -n operators
 ```
 
-Step 6 : Access the Prometheus service using below link. 
+Step 6 : Access the Prometheus dashboard using below link. 
 
 ```
 http://##DNS.ip##:30100
 ```
 
-On the prometheus UI, you will see the monitoring targets inside Status -> Targets.
-You will see the monitoring metric for the MariaDB endpoint at http://##DNS.ip##:30100/metrics
+On the prometheus UI, Go to Status tab. Choose option Targets to see endpoints.
+
 
 
 
