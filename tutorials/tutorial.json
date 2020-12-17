@@ -1,0 +1,34 @@
+{
+   "name":"Prometheus Operator Tutorial",
+   "appLayout":"accordion",
+   "appTheme":"g90",
+   "footer":"footer.md",
+   "tutorials":[
+      {
+         "description":" A User Guide for verification of Prometheus Operator Installation",
+         "duration":"5 min",
+         "tutorial_name":"operator-installation-verification-tutorial.md",
+         "title":"Prometheus Operator Installation Verification Tutorial"
+      },
+      {
+         "description":" Prometheus Instance Creation tutorial",
+         "duration":"10 min",
+         "tutorial_name":"prometheus-instance-creation-tutorial.md",
+         "title":"Prometheus Instance Creation tutorial"
+      },
+      {
+         "description":" learn how to monitor targets using Prometheus",
+         "duration":"30 min",
+         "tutorial_name":"monitoring-using-prometheus.md",
+         "title":"Monitor targets through Prometheus"
+      }
+      
+   ],
+   "usefulLinks":[
+      {
+         "title":"Prometheus Operator",
+         "description":"Prometheus Operator ",
+         "url":"https://operatorhub.io/operator/prometheus"
+      }
+   ]
+}

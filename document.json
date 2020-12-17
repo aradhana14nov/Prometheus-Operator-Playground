@@ -1,0 +1,43 @@
+{
+  "name": "Prometheus Operator",
+  "description": "Prometheus Operator",
+  "logo": "_images/SalesStack.png",
+  "has_supporting_content": true,
+  "stack_id": "prometheus-operator",
+  "type": "stack",
+  "categories": ["Monitoring"],
+  "platform": "Kubernetes",
+  "cover": "cover.md",
+  "meta": {
+    "Monitoring": ["Prometheus"],
+    "Type":[
+         "Operators"
+      ],
+    "Install time": ["5 minutes"]
+  },
+"deployment_information": {
+  "Operator Project": "/home/student/projects/prometheus-operator",
+  "Deployment Namespace": "operators"
+},
+  "commands": [
+    {
+      "description": "Set Namespace",
+      "exec": "export PROMETHEUS_OPERATOR_NAMESPACE=operators"
+    },
+    {
+      "description": "Prepare Workspace",
+      "exec": "cd /home/student/projects && mkdir prometheus-operator && cd prometheus-operator"
+    },
+	{
+      "description": "Install Operator",
+      "exec": "kubectl create -f https://operatorhub.io/install/prometheus.yaml"
+    }
+  ],
+  "display": [
+    {
+      "name": "Developer Dashboard",
+      "url": "##DNS.host##/codeserver",
+      "enabled": true
+    }
+  ]
+}
