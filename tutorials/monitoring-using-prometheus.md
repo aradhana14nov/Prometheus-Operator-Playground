@@ -93,9 +93,12 @@ Steps3 : Lets see how we can access MariaDB Database.
 
 - Copy below command and execute by adding MariaDB Server Instance podname.
 
+
 ```copycommand
 kubectl exec -it <podname> bash -n my-mariadb-operator-app
 ```
+
+
 - login through db-user 
 
 ```execute
@@ -150,8 +153,12 @@ insert into names values('Abhijit');
 select * from names;
 ```
 
+```execute
+exit
+```
 
-Step3: Create below CR for MariaDB Monitoring services.
+
+Step4: Create below CR for MariaDB Monitoring services.
 
 ```execute
 cat <<'EOF'> MariaDBmonitoring.yaml
@@ -186,7 +193,7 @@ This CR will start Prometheus exporter pod and service.
 
 
 
-Step 4: Create below CR which will create Instance of ServiceMonitor to monitor MariaDB Services:
+Step 5: Create below CR which will create Instance of ServiceMonitor to monitor MariaDB Services:
 
 
 ```execute
@@ -218,7 +225,7 @@ EOF
 kubectl create -f ServiceMonitor.yaml -n operators
 ```
 
-Step 5 : Access the Prometheus service using below link. 
+Step 6 : Access the Prometheus service using below link. 
 
 ```
 http://##DNS.ip##:30100
