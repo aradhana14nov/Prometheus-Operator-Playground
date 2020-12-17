@@ -1,6 +1,6 @@
 ---
 title: Prometheus Operator Installation Verification Tutorial
-description: This tutorial explains how to verify that the Prometheus Operator got installed properly in the namespace
+description: Check Operator Deployment Status
 ---
 
 ### Check the Prometheus Operator 
