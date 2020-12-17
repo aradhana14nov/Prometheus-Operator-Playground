@@ -34,7 +34,7 @@ Execute below command to create Prometheus instance
 kubectl create -f prometheusInstance.yaml -n operators
 ```
 
-You will see the following resources to be created:
+You will see the following resources created:
 
 ```output
 prometheus.monitoring.coreos.com/prometheus created
