@@ -88,8 +88,14 @@ EOF
 kubectl create -f MariaDBserver.yaml -n my-mariadb-operator-app 
 ```
 
+- Check pods :
 
-Steps3 : Lets see how we can access MariaDB Database. 
+```execute
+kubectl get pods -n my-mariadb-operator-app
+```
+
+Steps3 : Check how we can access MariaDB Database. 
+
 
 - Copy below command and execute by adding MariaDB Server Instance podname.
 
@@ -101,9 +107,11 @@ kubectl exec -it <podname> bash -n my-mariadb-operator-app
 
 - login through db-user 
 
+
 ```execute
 mysql -h ##DNS.ip## -P 30685 -u db-user -pdb-user
 ```
+
 
 - check the the created database 
 
@@ -111,11 +119,14 @@ mysql -h ##DNS.ip## -P 30685 -u db-user -pdb-user
 show databases;
 ```
 
+
 - exit in order to login through root user, if you want to create some DB Tables.
+
 
 ```execute
 exit
 ```
+
 
 - Login through root user
 
@@ -131,22 +142,27 @@ mysql -h ##DNS.ip## -P 30685 -u root -ppassword
 create database testdb;
 ```
 
+
 - Use already created database in above steps 
+
 
 ```execute
 use testdb;
 ```
+
 
 - create table 
 
 ```execute
 create table names (name VARCHAR(100));
 ```
+
 - Insert data 
 
 ```execute
 insert into names values('Abhijit');
 ```
+
 - Retrieve data from table
 
 ```execute
@@ -158,7 +174,9 @@ exit
 ```
 
 
+
 Step4: Create below CR for MariaDB Monitoring services.
+
 
 ```execute
 cat <<'EOF'> MariaDBmonitoring.yaml
