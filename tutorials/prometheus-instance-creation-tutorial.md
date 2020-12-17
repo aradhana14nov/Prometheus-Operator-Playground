@@ -45,7 +45,7 @@ Get the associated Pods:
 ```execute
 kubectl get pods -n operators
 ```
-You will be able to see the below output:
+You will be able to see pods:
 
 ```output
 NAME                                   READY   STATUS    RESTARTS   AGE
@@ -83,14 +83,13 @@ EOF
 kubectl create -f prometheus_service.yaml -n operators
 ```
 
-- Access the service :
+- Access Prometheus dashboard with below url :
 
 
-Click on the <a href="http://##DNS.ip##:30100" target="_blank">http://##DNS.ip##:30100</a> to access Prometheus Service from your browser.
+Click on <a href="http://##DNS.ip##:30100" target="_blank">http://##DNS.ip##:30100</a> to access Prometheus dashboard from your browser.
 
-You will see the Prometheus metrics page as below :
+You will see the Prometheus dashboard as below :
 
 ![prometheus-page](_images/prom.png)
 
-This is the minimal steps of getting the Prometheus Operator Instances. You need to modify the instance accordingly for your application.
 
