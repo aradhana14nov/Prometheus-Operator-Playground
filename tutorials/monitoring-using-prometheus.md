@@ -208,6 +208,11 @@ kubectl create -f MariaDBmonitoring.yaml -n my-mariadb-operator-app
 
 This CR will start Prometheus exporter pod and service. 
 
+- Check pods :
+
+```execute
+kubectl get pods -n my-mariadb-operator-app
+```
 
 
 
