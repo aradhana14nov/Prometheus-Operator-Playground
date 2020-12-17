@@ -1,8 +1,8 @@
 ---
 title: Prometheus Instance Creation tutorial
-description: This tutorial explains how create Instances for your Prometheus Operator.
+description: This tutorial explains how create Instances for Prometheus
 ---
-### Create this CR which will create a Prometheus Instance 
+### Create this CR which will create a Prometheus Instance
 
 ```execute
 cat <<'EOF' > prometheusInstance.yaml
