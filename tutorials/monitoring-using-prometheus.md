@@ -70,7 +70,7 @@ NAME                               READY   STATUS    RESTARTS   AGE
 mariadb-operator-f96ddc69f-d5vgr   1/1     Running   0          100s
 ```
 
-Note: In above output, STATUS as "Running" shows the pods are up and running.
+In above output, STATUS as "Running" shows the pods are up and running.
 
 
 Step 2: To create MariaDB database called test-db along with user credentials , create the below yaml definition of the Custom Resource.
@@ -293,11 +293,10 @@ Output:
 servicemonitor.monitoring.coreos.com/mariadb-monitor created
 ```
 
-Step 6 : Access the Prometheus dashboard using below link. 
+Step 6 : Access the Prometheus dashboard using below link:
 
-```
 http://##DNS.ip##:30100
-```
+
 
 - On the prometheus UI, Go to Status -> Targets to see endpoints.
 
