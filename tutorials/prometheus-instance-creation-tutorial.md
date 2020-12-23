@@ -54,7 +54,7 @@ prometheus-server-0                    3/3     Running   1          26s
 ```
 
 
-- Create the service to access prometheus server
+- Create below yaml for NodePort service to access prometheus server
 
 
 ```execute
@@ -80,6 +80,12 @@ EOF
 
 ```execute
 kubectl create -f prometheus_service.yaml -n operators
+```
+
+Output:
+
+```
+service/prometheus created
 ```
 
 - Access Prometheus dashboard with below url :
