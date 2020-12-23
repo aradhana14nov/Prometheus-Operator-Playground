@@ -30,12 +30,30 @@ Step 1:  Install the MariaDB operator by running the following command:
 kubectl create -f https://operatorhub.io/install/mariadb-operator-app.yaml             
 ```
 
-- watch your operator come up using below command :
+Output:
+
+```
+namespace/my-mariadb-operator-app created
+operatorgroup.operators.coreos.com/operatorgroup created
+subscription.operators.coreos.com/my-mariadb-operator-app created
+```
+
+- After installation, verify that your operator got successfully installed by executing the below command.
 
 
 ```execute
 kubectl get csv -n my-mariadb-operator-app
 ```
+
+Output:
+
+```
+NAME                      DISPLAY            VERSION   REPLACES                  PHASE
+mariadb-operator.v0.0.4   Mariadb Operator   0.0.4     mariadb-operator.v0.0.3   Succeeded
+```
+
+Once operator is successfully installed, Output PHASE should be as "Succeeded".
+
 
 - Get the associated Pods using below command:
 
@@ -43,6 +61,16 @@ kubectl get csv -n my-mariadb-operator-app
 ```execute
 kubectl get pods -n my-mariadb-operator-app
 ```
+
+
+Output:
+
+```
+NAME                               READY   STATUS    RESTARTS   AGE
+mariadb-operator-f96ddc69f-d5vgr   1/1     Running   0          100s
+```
+
+Note: In above output, STATUS as "Running" shows the pods are up and running.
 
 
 Step 2: To create MariaDB database called test-db along with user credentials , create the below yaml definition of the Custom Resource.
@@ -86,10 +114,24 @@ EOF
 kubectl create -f MariaDBserver.yaml -n my-mariadb-operator-app 
 ```
 
+Output:
+
+```
+mariadb.mariadb.persistentsys/mariadb created
+```
+
 - Check pods status :
 
 ```execute
 kubectl get pods -n my-mariadb-operator-app
+```
+
+Output:
+
+```
+NAME                               READY   STATUS    RESTARTS   AGE
+mariadb-operator-f96ddc69f-l44r4   1/1     Running   0          10m
+mariadb-server-5dccfb7b59-rwzqp    1/1     Running   0          10m
 ```
 
 Step 3 : Access MariaDB Database. 
@@ -126,13 +168,12 @@ exit
 ```
 
 
-- To login through root user use below command:
+- To login through root user, use below command:
 
 
 ```
 mysql -h ##DNS.ip## -P 30685 -u root -ppassword
 ```
-
 
 
 
@@ -187,6 +228,13 @@ Note: The database host and port should be correct for metrics to work. Host wil
 kubectl create -f MariaDBmonitoring.yaml -n my-mariadb-operator-app
 ```
 
+
+Output:
+
+```
+monitor.mariadb.persistentsys/mariadb-monitor created
+```
+
 This will start Prometheus exporter pod and service. 
 
 
@@ -197,6 +245,14 @@ This will start Prometheus exporter pod and service.
 kubectl get pods -n my-mariadb-operator-app
 ```
 
+Output:
+
+```
+NAME                                          READY   STATUS    RESTARTS   AGE
+mariadb-monitor-deployment-7dd85cfbbd-kbbjb   1/1     Running   0          9s
+mariadb-operator-f96ddc69f-l44r4              1/1     Running   0          16m
+mariadb-server-5dccfb7b59-rwzqp               1/1     Running   0          16m
+```
 
 
 Step 5: Create Instance of ServiceMonitor to monitor MariaDB Services:
@@ -229,6 +285,12 @@ EOF
 
 ```execute
 kubectl create -f ServiceMonitor.yaml -n operators
+```
+
+Output:
+
+```
+servicemonitor.monitoring.coreos.com/mariadb-monitor created
 ```
 
 Step 6 : Access the Prometheus dashboard using below link. 
