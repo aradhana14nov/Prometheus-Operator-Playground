@@ -237,7 +237,17 @@ Step 6 : Access the Prometheus dashboard using below link.
 http://##DNS.ip##:30100
 ```
 
-On the prometheus UI, Go to Status tab. Choose option:Targets to see endpoints.
+- On the prometheus UI, Go to Status -> Targets to see endpoints.
+
+
+ ![](_images/targets.PNG)
+
+
+
+- From the dropdown you can select the query and click on "Execute" to see MariaDB Metrics. See below snapshot :
+
+
+![](_images/queryexecution.PNG)
 
 
 
