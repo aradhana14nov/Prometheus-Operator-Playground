@@ -2,7 +2,7 @@
 title: Prometheus Instance Creation tutorial
 description: This tutorial explains how create Instances for Prometheus
 ---
-### Create below yaml to create CR for Prometheus Instance
+### Create below yaml to create CR for Prometheus Instance:
 
 ```execute
 cat <<'EOF' > prometheusInstance.yaml
@@ -54,7 +54,7 @@ prometheus-server-0                    3/3     Running   1          26s
 ```
 
 
-- Create below yaml for NodePort service to access prometheus server
+- Create below yaml for NodePort service to access prometheus server:
 
 
 ```execute
