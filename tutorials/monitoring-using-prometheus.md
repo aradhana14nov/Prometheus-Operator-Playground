@@ -38,7 +38,7 @@ operatorgroup.operators.coreos.com/operatorgroup created
 subscription.operators.coreos.com/my-mariadb-operator-app created
 ```
 
-- After installation, verify that your operator got successfully installed by executing the below command.
+- After installation, verify that your operator got successfully installed by executing the below command:
 
 
 ```execute
@@ -73,7 +73,7 @@ mariadb-operator-f96ddc69f-d5vgr   1/1     Running   0          100s
 In above output, STATUS as "Running" shows the pods are up and running.
 
 
-Step 2: To create MariaDB database called test-db along with user credentials , create the below yaml definition of the Custom Resource.
+Step 2: To create MariaDB database called test-db along with user credentials , create the below yaml definition of the Custom Resource:
 
 ```execute
 cat <<'EOF' > MariaDBserver.yaml
@@ -198,7 +198,7 @@ Step 4: Enable monitoring service for MariaDB Server.
   
   From above command output, mariadb-service port is 30685 
 
-- To enable monitoring using Prometheus exporter pod and service , create the below yaml definition of the Custom Resource.
+- To enable monitoring using Prometheus exporter pod and service,create the below yaml definition of the Custom Resource:
 
 ```execute
 cat <<'EOF'> MariaDBmonitoring.yaml
@@ -222,7 +222,7 @@ EOF
 Note: The database host and port should be correct for metrics to work. Host will be cluster IP and the port will be mariadb-service port(see Step 4).
 
 
-- Execute below command to Create Instance of Monitoring 
+- Execute below command to Create Instance of Monitoring: 
 
 ```execute
 kubectl create -f MariaDBmonitoring.yaml -n my-mariadb-operator-app
